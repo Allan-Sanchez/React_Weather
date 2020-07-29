@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { Fragment } from "react";
+import Banner from "./components/Banner";
+import CardForm from './components/CardForm';
+import CardWeather from './components/CardWeather';
+import { Container } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 
 function App() {
   return (
-    <div className="App">
-      <h1>App Weather</h1>
-    </div>
+    <Fragment>
+      <Banner></Banner>
+      <Container>
+        <Grid container spacing={4}>
+          <Grid item xs={6} >
+            <CardForm/>
+          </Grid>
+          <Grid item xs={6}>
+            <CardWeather></CardWeather>
+          </Grid>
+        </Grid>
+      </Container>
+    </Fragment>
   );
 }
 
