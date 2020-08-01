@@ -1,56 +1,84 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
+import Error from './Error';
 
 const currencies = [
   {
-    value: "USD",
-    label: "$",
+    value: "US",
+    label: "United States",
   },
   {
-    value: "EUR",
-    label: "€",
+    value: "GT",
+    label: "Guatemala",
   },
   {
-    value: "BTC",
-    label: "฿",
+    value: "MX",
+    label: "Mexico",
   },
   {
-    value: "JPY",
-    label: "¥",
+    value: "ES",
+    label: "Spain",
   },
 ];
 
 const CardForm = () => {
-  const [currency, setCurrency] = useState("EUR");
+  const [error, setError] = useState(false);
+  const [data, setData] = useState({
+    country:'GT',
+    city: ''
+  });
 
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
+  const {country, city } = data;
+  // const [currency, setCurrency] = useState("");
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name] : e.target.value
+    });
+    // setCurrency(event.target.value);
   };
 
+  const habdleSubmit = (e) =>{
+    e.preventDefault();
+
+    if (city.trim() === '' || country.trim() === '') {
+      setError(true);
+      return;
+    }
+    setError(false);
+    console.log('test');
+  }
+
   return (
+    <Fragment>
     <Card className="m-4">
+        {error ? <Error message="Please, fill all input"/> :null }
       <CardContent>
         <Typography  variant="h5" className="flex justify-center py-5">
           Form React Wheather
         </Typography>
 
-        <form className="">
+        <form onSubmit={habdleSubmit}>
           <div className="w-2/3 mx-auto mb-10">
-            <TextField fullWidth id="filled-basic" label="Type name the city" />
+            <TextField fullWidth id="filled-basic" name="city"
+              label="Type name the city" value={city} 
+              onChange={handleChange}
+              />
           </div>
 
           <div className="w-2/3 mx-auto mb-5">
             <TextField
               fullWidth
               id="standard-select-currency"
-              select
-              label="Select"
-              value={currency}
+              select name="country"
+              // label="Select"
+              value={country}
               onChange={handleChange}
               helperText="Please select Contry "
             >
@@ -63,12 +91,13 @@ const CardForm = () => {
           </div>
           <div className="w-2/3 mx-auto mb-5 flex justify-end">
             <Button type="submit" variant="contained" size="large" color="primary">
-              Primary
+              Weather Search
             </Button>
           </div>
         </form>
       </CardContent>
     </Card>
+    </Fragment>
   );
 };
 
