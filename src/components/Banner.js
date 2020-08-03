@@ -19,7 +19,6 @@ const Banner = () => {
       <Toolbar className={classes.title}>
         <Typography variant="h5" className="text-center" >
           React Weather Material UI
-          
         </Typography>
       </Toolbar>
     </AppBar>

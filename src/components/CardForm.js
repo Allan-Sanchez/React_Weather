@@ -6,6 +6,8 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Error from './Error';
+import PropTypes from 'prop-types'
+
 
 const currencies = [
   {
@@ -26,13 +28,10 @@ const currencies = [
   },
 ];
 
-const CardForm = () => {
-  const [error, setError] = useState(false);
-  const [data, setData] = useState({
-    country:'GT',
-    city: ''
-  });
+const CardForm = ({data,setData, setConsult}) => {
 
+  const [error, setError] = useState(false);
+  
   const {country, city } = data;
   // const [currency, setCurrency] = useState("");
 
@@ -52,7 +51,7 @@ const CardForm = () => {
       return;
     }
     setError(false);
-    console.log('test');
+    setConsult(true);
   }
 
   return (
@@ -67,7 +66,7 @@ const CardForm = () => {
         <form onSubmit={habdleSubmit}>
           <div className="w-2/3 mx-auto mb-10">
             <TextField fullWidth id="filled-basic" name="city"
-              label="Type name the city" value={city} 
+              label="Type name of the city" value={city} 
               onChange={handleChange}
               />
           </div>
@@ -101,4 +100,9 @@ const CardForm = () => {
   );
 };
 
+CardForm.propTypes = {
+  data : PropTypes.object.isRequired,
+  setData : PropTypes.func.isRequired,
+  setConsult: PropTypes.func.isRequired
+};
 export default CardForm;

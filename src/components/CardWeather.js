@@ -1,46 +1,50 @@
 import React from "react";
-
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import WeatherImage from "../weather_app.svg";
+import PropTypes from 'prop-types'
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
-});
 
-const CardWeather = () => {
-  const classes = useStyles();
 
+const CardWeather = ({weatherData}) => {
+
+  const {name , main} = weatherData;
+
+  if (!name) {
+    return null
+  }
+  const kelvin = 273.15;
   return (
     <Card className="w-2/3 mt-4 mx-auto">
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=401&q=80"
-          title="Contemplative Reptile"
-        />
+        <div className="w-full flex justify-center px-10 py-2">
+
+           <img className="h-32" src={WeatherImage} alt="React Logo" />
+        </div>
+        <Typography className="text-center px-10" gutterBottom variant="h5" component="h5">
+            The temperature of {name} is: 
+          </Typography>
         <CardContent>
-          <Typography className="text-center" gutterBottom variant="h5" component="h2">
-            Actuality Weather
+          <Typography className="text-center" gutterBottom variant="h4" component="h4">
+            Actual Temperature 
+          </Typography>
+
+          <Typography className="text-center" gutterBottom variant="h2" component="h2">
+           <span>{parseFloat(main.temp - kelvin,10).toFixed(2)} &#x2103; </span>
           </Typography>
           <Typography className="text-center " variant="body2" color="textSecondary" component="p">
-          Lorem ipsum dolor sit amet.
+          Maximum temperature <span>{parseFloat( main.temp_max - kelvin,10).toFixed(2)} &#x2103; </span>
           </Typography>
           <Typography className="text-center" variant="body2" color="textSecondary" component="p">
-          Lorem ipsum dolor sit amet.
+          Minimun temperature. <span>{parseFloat( main.temp_min - kelvin,10).toFixed(2)} &#x2103; </span>
           </Typography>
         </CardContent>
-      </CardActionArea>
     </Card>
   );
+};
+
+CardWeather.propTypes = {
+  weatherData: PropTypes.object.isRequired
 };
 
 export default CardWeather;

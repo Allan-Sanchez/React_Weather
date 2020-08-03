@@ -2,10 +2,10 @@ import React from "react";
 
 const Error = ({message}) => {
   return (
-    <div class="flex max-w-sm w-full mx-auto bg-gray-300 shadow-md rounded-lg overflow-hidden mt-10">
-      <div class="flex justify-center items-center w-12 bg-red-500">
+    <div className="flex max-w-sm w-full mx-auto bg-gray-300 shadow-md rounded-lg overflow-hidden mt-10">
+      <div className="flex justify-center items-center w-12 bg-red-500">
         <svg
-          class="h-6 w-6 fill-current text-white"
+          className="h-6 w-6 fill-current text-white"
           viewBox="0 0 40 40"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -13,10 +13,10 @@ const Error = ({message}) => {
         </svg>
       </div>
 
-      <div class="-mx-3 py-2 px-4">
-        <div class="mx-3">
-          <span class="text-red-500 font-semibold">Error</span>
-          <p class="text-gray-600 text-sm">{message}</p>
+      <div className="-mx-3 py-2 px-4">
+        <div className="mx-3">
+          <span className="text-red-500 font-semibold">Error</span>
+          <p className="text-gray-600 text-sm">{message}</p>
         </div>
       </div>
     </div>
